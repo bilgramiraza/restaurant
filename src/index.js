@@ -1,24 +1,22 @@
-import './style.css'
-import Pic from './Image.jpg'
-function content(element){
-    const heading = document.createElement('h1');
-    heading.textContent = "RESTAURANT PAGE";
-
-    const img = new Image();
-    img.src = Pic;
-    img.width="200";
-    img.height="250";
-
-    const paragraph = document.createElement('p');
-    paragraph.textContent = "Lorem ipsum dolor sit amet consectetur" + 
-                            "adipisicing elit. Tempore, tenetur commodi "+
-                            "in voluptatem explicabo beatae, pariatur "+
-                            "ratione vero sunt quo a, esse soluta molestias perspiciatis!";
-    paragraph.classList.add('color');
-    element.appendChild(heading);
-    element.appendChild(img);
-    element.appendChild(paragraph);
-}
+import buildHomePage from "./basePage";
+import pageSwapper from "./pageSwapper";
+import clearPage from "./clearPage";
+import addButtons from "./button";
 
 const contentdiv = document.querySelector('#content');
-content(contentdiv);
+const buttondiv = document.createElement('div');
+buttondiv.id = 'navbar';
+buildHomePage(contentdiv);
+addButtons(buttondiv);
+document.body.appendChild(buttondiv);
+
+const buttons = document.querySelectorAll('button');
+
+
+
+buttons.forEach((button)=>{
+    button.addEventListener('click',(event)=>{
+    clearPage(contentdiv);
+    pageSwapper(event.target.id,contentdiv);
+    });
+});
